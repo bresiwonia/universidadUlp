@@ -7,8 +7,8 @@ package AccesoADatos;
 
 /**
  *
- * @author viper
+ * @author agust
  */
-public class ConexionData {
+class DriverManager {
     
 }

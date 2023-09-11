@@ -5,6 +5,8 @@
  */
 package universidadulp_transversal;
 
+import AccesoADatos.ConexionDate;
+
 /**
  *
  * @author viper
@@ -15,7 +17,9 @@ public class UniversidadUlp_transversal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       ConexionDate cc = new ConexionDate("universidadulp");
+       cc.conectar();
+       
     }
     
 }
