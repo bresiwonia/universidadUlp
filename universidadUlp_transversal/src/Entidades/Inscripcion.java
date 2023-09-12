@@ -11,8 +11,8 @@ package Entidades;
  */
 public class Inscripcion {
     private int idInscripcion;
-    private Alumno alumno[];
-    private Materia materia[];
+    private Alumno alumno;
+    private Materia materia;
     private double nota;
 
     public Inscripcion() {
@@ -20,32 +20,32 @@ public class Inscripcion {
 
     
     
-    public Inscripcion(int idInscripcion, Alumno[] alumno, Materia[] materia, double nota) {
+    public Inscripcion(int idInscripcion, Alumno alumno, Materia materia, double nota) {
         this.idInscripcion = idInscripcion;
         this.alumno = alumno;
         this.materia = materia;
         this.nota = nota;
     }
 
-    public Inscripcion(Alumno[] alumno, Materia[] materia, double nota) {
+    public Inscripcion(Alumno alumno, Materia materia, double nota) {
         this.alumno = alumno;
         this.materia = materia;
         this.nota = nota;
     }
 
-    public Alumno[] getAlumno() {
+    public Alumno getAlumno() {
         return alumno;
     }
 
-    public void setAlumno(Alumno[] alumno) {
+    public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
 
-    public Materia[] getMateria() {
+    public Materia getMateria() {
         return materia;
     }
 
-    public void setMateria(Materia[] materia) {
+    public void setMateria(Materia materia) {
         this.materia = materia;
     }
 
@@ -64,6 +64,11 @@ public class Inscripcion {
     public void setIdInscripcion(int idInscripcion) {
         this.idInscripcion = idInscripcion;
     }
-   
+
+    @Override
+    public String toString() {
+       String insc=idInscripcion + alumno.getNombre()+", " + alumno.getApellido() + " "+materia.getNombre();
         
+       return insc;
+    }       
 }

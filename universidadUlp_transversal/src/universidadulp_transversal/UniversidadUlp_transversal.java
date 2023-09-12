@@ -5,7 +5,8 @@
  */
 package universidadulp_transversal;
 
-import AccesoADatos.ConexionDate;
+import AccesoADatos.Conexion;
+import java.sql.Connection;
 
 /**
  *
@@ -17,8 +18,7 @@ public class UniversidadUlp_transversal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       ConexionDate cc = new ConexionDate("universidadulp");
-       cc.conectar();
+      Connection con = Conexion.getConexion();
        
     }
     
