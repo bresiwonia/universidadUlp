@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package universidadulp_transversal;
+package AccesoADatos;
 
-import AccesoADatos.Conexion;
 import java.sql.Connection;
+
 
 /**
  *
@@ -18,8 +18,9 @@ public class UniversidadUlp_transversal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      Connection con = Conexion.getConexion();
-       
+Connection con=Conexion.getConexion();
+
+
     }
     
 }
