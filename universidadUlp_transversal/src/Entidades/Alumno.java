@@ -15,7 +15,7 @@ public class Alumno {
     
 
     private int idAlumno;
-    private String dni;
+    private int dni;
     private String apellido;
     private String nombre;
     private LocalDate fechaNacimiento;
@@ -26,7 +26,7 @@ public class Alumno {
     
     public Alumno() {
     }
-    public Alumno(int idAlumno, String dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
         this.idAlumno = idAlumno;
         this.dni = dni;
         this.apellido = apellido;
@@ -35,7 +35,7 @@ public class Alumno {
         this.estado = estado;
     }
 
-    public Alumno(String dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+    public Alumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -51,11 +51,11 @@ public class Alumno {
         this.idAlumno = idAlumno;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
