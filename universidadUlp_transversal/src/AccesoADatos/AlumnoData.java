@@ -20,11 +20,11 @@ import javax.swing.JOptionPane;
  *
  * @author viper
  */
-public class AlumnoDate {
+public class AlumnoData {
 
     private Connection con = null;
 
-    public AlumnoDate() {
+    public AlumnoData() {
 
         con = Conexion.getConexion();
 
