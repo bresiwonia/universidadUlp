@@ -1,6 +1,7 @@
 package vista;
 
-import AccesoADatos.AlumnoDate;
+import AccesoADatos.AlumnoData;
+import Entidades.Alumno;
 
 
 /**
@@ -198,7 +199,17 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       AlumnoDate buscar=new AlumnoDate();
+       AlumnoData buscar=new AlumnoData();
+       
+//    buscar.buscarAlumnoPorDni(Integer.parseInt(getText());
+       Alumno alumnoEncontrado=buscar.buscarAlumnoPorDni(987654321);
+       System.out.println(alumnoEncontrado.getDni());
+       
+  if(alumnoEncontrado.isEstado())
+            System.out.println(alumnoEncontrado.getApellido());
+            System.out.println(alumnoEncontrado.getNombre());
+            System.out.println(alumnoEncontrado.getFechaNacimiento());
+       
 //    buscar.buscarAlumnoPorDni(Integer.parseInt(getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 

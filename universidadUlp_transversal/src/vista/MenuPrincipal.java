@@ -27,6 +27,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -41,7 +42,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
+
         jmAlumno.setText("Alumno");
+        jmAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAlumnoActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Formulario de Alumno");
         jmAlumno.add(jMenuItem1);
@@ -81,15 +98,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
+        // TODO add your handling code here:
+       
+        escritorio.removeAll();
+        escritorio.repaint();
+        AlumnoView formulario = new AlumnoView(); 
+        formulario.setVisible(true);
+        escritorio.add(formulario);
+        escritorio.moveToFront(formulario);
+    }//GEN-LAST:event_jmAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,11 +150,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuPrincipal().setVisible(true);
+                
+            
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
