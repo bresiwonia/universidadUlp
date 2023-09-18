@@ -81,13 +81,18 @@ InscripcionData id=new InscripcionData();
 //c.guardarInscripcion(insc);
 //c.actualizarNota(8, 8, 10);
 //c.borrarInscripcionMateriaAlumno(8, 8);
-for(Inscripcion inscripcion:id.obtenerInscripciones()){
+//for(Inscripcion inscripcion:id.obtenerInscripciones()){
+//    
+//    System.out.println("id: "+inscripcion.getIdInscripcion());
+//    System.out.println("Apellido: " +inscripcion.getAlumno().getApellido());
+//    System.out.println("Materia: "+inscripcion.getMateria().getNombre());
+//}
+//        }
     
-    System.out.println("id "+inscripcion.getIdInscripcion());
-    System.out.println("Apellido" +inscripcion.getAlumno());
-    System.out.println("Materia "+inscripcion.getMateria().getNombre());
-}
-        }
+for(Materia materia:id.obtenerMateriasNoCursadas(5)){
     
+    System.out.println("nombre "+materia.getNombre());
+}   
 
-    }
+    } 
+}
