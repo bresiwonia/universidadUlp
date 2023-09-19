@@ -74,6 +74,7 @@ AlumnoData ad=new AlumnoData();
 MateriaData md=new MateriaData();
 InscripcionData id=new InscripcionData();
 
+
 //Alumno mara=ad.buscarAlumno(5);
 //Materia Literatura=md.buscarMateria(9);
 ////

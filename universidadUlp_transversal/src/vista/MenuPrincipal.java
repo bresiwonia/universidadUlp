@@ -85,6 +85,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jmConsultas);
 
         jmSalir.setText("Salir");
+        jmSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSalirActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
@@ -119,6 +124,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(formulario);
                                         
     }//GEN-LAST:event_jMenuFAlumnoActionPerformed
+
+    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        // TODO add your handling code here:
+         dispose();
+    }//GEN-LAST:event_jmSalirActionPerformed
 
    
     public static void main(String args[]) {
