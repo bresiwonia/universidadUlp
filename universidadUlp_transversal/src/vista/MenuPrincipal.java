@@ -127,7 +127,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 
           
             }
-        });
+        }); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
