@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 /**
  *
@@ -116,6 +120,8 @@ public class AlumnoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jfechaNacimiento.setPreferredSize(new java.awt.Dimension(100, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,9 +134,29 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< Updated upstream
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(166, 166, 166))
+=======
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(166, 166, 166))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(125, 125, 125)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbBuscar))
+                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(42, 42, 42))))
+>>>>>>> Stashed changes
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -159,9 +185,26 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                                 .addComponent(jbEliminar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbGuardar)
+<<<<<<< Updated upstream
                                 .addGap(21, 21, 21)))
                         .addComponent(jbSalir)
                         .addGap(11, 11, 11))))
+=======
+                                .addGap(21, 21, 21)
+                                .addComponent(jbSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jrbActivo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,11 +228,22 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbActivo)
                     .addComponent(jLabel5))
+<<<<<<< Updated upstream
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+=======
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -278,6 +332,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+<<<<<<< Updated upstream
         // TODO add your handling code here:
         try {
 
@@ -317,6 +372,43 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No se puede guardar alumno, debe completar todos los datos");
         }
+=======
+       AlumnoData buscar=new AlumnoData();
+       
+
+       Alumno alumnoEncontrado=buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
+       
+       
+  if(alumnoEncontrado != null) {
+      
+      System.out.println(alumnoEncontrado.getDni());
+  
+            System.out.println(alumnoEncontrado.getDni());
+            jtApellido.setText(alumnoEncontrado.getApellido());
+            jtNombre.setText(alumnoEncontrado.getNombre());
+            jrbActivo.setSelected(true);
+            jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            
+                    
+      JOptionPane.showMessageDialog(null,"No se puede guardar alumno, es una identidad ya existente ");
+            
+  }
+else{
+            int dni= Integer.parseInt(jtDocumento.getText());
+            String apellido=jtApellido.getText();
+            String nombre=jtNombre.getText();
+            LocalDate fecha = jfechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           
+   
+        Alumno alumno=new Alumno (dni,apellido,nombre,fecha,true);
+
+        AlumnoData alu=new AlumnoData();
+//alu.guardarAlumno(Juan);
+    alu.guardarAlumno(alumno);
+    System.out.println("alumno guardado");
+    }
+    
+>>>>>>> Stashed changes
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
