@@ -57,9 +57,9 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
-        jLabel2.setText("Codigo;");
+        jLabel2.setText("Codigo:");
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Nombre:");
 
         jLabel4.setText("Año:");
 
@@ -143,7 +143,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                 .addContainerGap(134, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,33 +173,31 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                     .addComponent(jbEliminar)
                     .addComponent(jbGuardar)
                     .addComponent(jbSalir))
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-//        try {
-        MateriaData buscar = new MateriaData();
+      try {
+            MateriaData buscar = new MateriaData();
 
-        Materia materiaEncontrada = buscar.buscarMateria(Integer.parseInt(jtIdMateria.getText()));
-//            String aniod=Integer.parseInt(materiaEncontrada.getAnioMateria());
-        System.out.println(materiaEncontrada.getIdMateria());
-//           Integer.parseInt(materiaEncontrada.getAnioMateria())
-        if (materiaEncontrada != null) {
-////String mat=Integer.parseInt(materiaEncontrada.getAnioMateria());
-//         
-//String anio=Integer.parseInt(materiaEncontrada.getAnioMateria());
-            jtNombre.setText(materiaEncontrada.getNombre());
+            Materia materiaEncontrada = buscar.buscarMateria(Integer.parseInt(jtIdMateria.getText()));
 
-//                jtAnio.setText(Integer.parseInt(materiaEncontrada.getAnioMateria()));
-            jrbActivo.setSelected(true);
+            System.out.println(materiaEncontrada.getIdMateria());
+     
+            if (materiaEncontrada != null) {
 
-        }
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(null, "No escribio un numero  de materia valido.");
-//            jtIdMateria.setText("");
+                jtNombre.setText(materiaEncontrada.getNombre());
+                jtAnio.setText(String.valueOf(materiaEncontrada.getAnioMateria()));
+                jrbActivo.setSelected(true);
+
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "No escribio un numero  de materia valido.");
+            jtIdMateria.setText("");
+               }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtIdMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdMateriaActionPerformed
