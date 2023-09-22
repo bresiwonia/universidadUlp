@@ -30,7 +30,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
         JFormularioDeInscripcion = new javax.swing.JLabel();
         jLSeleccionAlumno = new javax.swing.JLabel();
-        jCseleccion = new javax.swing.JComboBox<>();
         jListadoDeMaterias = new javax.swing.JLabel();
         jRMateriasInscriptas = new javax.swing.JRadioButton();
         jRmateriasNoInscriptas = new javax.swing.JRadioButton();
@@ -43,8 +42,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         JFormularioDeInscripcion.setText("                             Formulario De Inscripcion");
 
         jLSeleccionAlumno.setText("Seleccione un Alumno");
-
-        jCseleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jListadoDeMaterias.setText("Listado de Materias");
 
@@ -85,10 +82,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JBsalir, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLSeleccionAlumno)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCseleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLSeleccionAlumno)
                             .addComponent(jRMateriasInscriptas)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(53, 53, 53)
@@ -110,11 +104,9 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(JFormularioDeInscripcion)
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLSeleccionAlumno)
-                    .addComponent(jCseleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(25, 25, 25)
+                .addComponent(jLSeleccionAlumno)
+                .addGap(31, 31, 31)
                 .addComponent(jListadoDeMaterias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -127,7 +119,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                     .addComponent(jBinscribir)
                     .addComponent(jBanularInscripcion)
                     .addComponent(JBsalir))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,7 +131,6 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel JFormularioDeInscripcion;
     private javax.swing.JButton jBanularInscripcion;
     private javax.swing.JButton jBinscribir;
-    private javax.swing.JComboBox<String> jCseleccion;
     private javax.swing.JLabel jLSeleccionAlumno;
     private javax.swing.JLabel jListadoDeMaterias;
     private javax.swing.JRadioButton jRMateriasInscriptas;
