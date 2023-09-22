@@ -1,4 +1,4 @@
-//package vista;
+package vista;
 
 import AccesoADatos.AlumnoData;
 import Entidades.Alumno;
@@ -135,9 +135,9 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
+                                .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jrbActivo)
@@ -146,11 +146,10 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                                                 .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jbBuscar)))
-                                        .addGap(0, 21, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(61, 61, 61)
-                                        .addComponent(jfechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(21, 21, 21))))
+                                        .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbNuevo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -183,11 +182,14 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbActivo)
                     .addComponent(jLabel5))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -296,24 +298,33 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se puede guardar alumno, es una identidad ya existente ");
 
             } else {
+               
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String apellido = jtApellido.getText();
                 String nombre = jtNombre.getText();
+                boolean estado = jrbActivo.isSelected();
                 LocalDate fecha = jfechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
                 Alumno alumno = new Alumno(dni, apellido, nombre, fecha, true);
-
                 AlumnoData alu = new AlumnoData();
-//alu.guardarAlumno(Juan);
+                
+            if (estado == true){
                 alu.guardarAlumno(alumno);
                 System.out.println("alumno guardado");
-            }
+            
+            } else { 
+                JOptionPane.showMessageDialog(null, "Debe pulsar el boton de estado");
+            } 
+                    } 
+//alu.guardarAlumno(Juan);
+               
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "No escribio un numero  de documento valido.");
             jtDocumento.setText("");
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No se puede guardar alumno, debe completar todos los datos");
+            
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
