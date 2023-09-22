@@ -1,5 +1,7 @@
 package vista;
 
+//package vista;
+
 import AccesoADatos.AlumnoData;
 import Entidades.Alumno;
 import java.time.Instant;
@@ -7,7 +9,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -132,26 +133,33 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                         .addGap(166, 166, 166))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jrbActivo)
-                            .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jrbActivo)
+                                            .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jbBuscar)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(jfechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(21, 21, 21))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbNuevo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbBuscar))
-                            .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbEliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbGuardar)
-                        .addGap(21, 21, 21)
+                                .addComponent(jbEliminar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbGuardar)
+                                .addGap(21, 21, 21)))
                         .addComponent(jbSalir)
                         .addGap(11, 11, 11))))
         );
@@ -177,11 +185,11 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbActivo)
                     .addComponent(jLabel5))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                    .addComponent(jfechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -206,98 +214,109 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtNombreActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-       AlumnoData buscar=new AlumnoData();
-       
+        try {
+            AlumnoData buscar = new AlumnoData();
 
-       Alumno alumnoEncontrado=buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-       System.out.println(alumnoEncontrado.getDni());
-       
-  if(alumnoEncontrado != null) {
-  
+            Alumno alumnoEncontrado = buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
             System.out.println(alumnoEncontrado.getDni());
-            jtApellido.setText(alumnoEncontrado.getApellido());
-            jtNombre.setText(alumnoEncontrado.getNombre());
-            jrbActivo.setSelected(true);
-            jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-       
-          
-  }
-          
-      
+
+            if (alumnoEncontrado != null) {
+
+                System.out.println(alumnoEncontrado.getDni());
+                jtApellido.setText(alumnoEncontrado.getApellido());
+                jtNombre.setText(alumnoEncontrado.getNombre());
+                jrbActivo.setSelected(true);
+                jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "No escribio un numero  de documento valido.");
+            jtDocumento.setText("");
+
+        }
+
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-      
+
         jtDocumento.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
         jrbActivo.setSelected(false);
         jfechaNacimiento.setDate(null);
-        
+
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
-        AlumnoData buscar=new AlumnoData();
-       
+        try {
 
-       Alumno alumnoEncontrado=buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-       System.out.println(alumnoEncontrado.getDni());
-       
-  if(alumnoEncontrado != null) {
-  
+            AlumnoData buscar = new AlumnoData();
+
+            Alumno alumnoEncontrado = buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
             System.out.println(alumnoEncontrado.getDni());
-            jtApellido.setText(alumnoEncontrado.getApellido());
-            jtNombre.setText(alumnoEncontrado.getNombre());
-            jrbActivo.setSelected(true);
-            jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            buscar.eliminarAlumno(Integer.parseInt(jtDocumento.getText()));
-            
-          
-  }
-      
+
+            if (alumnoEncontrado != null) {
+
+                System.out.println(alumnoEncontrado.getDni());
+                jtApellido.setText(alumnoEncontrado.getApellido());
+                jtNombre.setText(alumnoEncontrado.getNombre());
+                jrbActivo.setSelected(true);
+                jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                buscar.eliminarAlumno(Integer.parseInt(jtDocumento.getText()));
+
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "No escribio un numero  de documento valido.");
+            jtDocumento.setText("");
+
+        }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-       
-     AlumnoData buscar=new AlumnoData();
-       
+        try {
 
-       Alumno alumnoEncontrado=buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-       
-       
-  if(alumnoEncontrado != null) {
-      
-      System.out.println(alumnoEncontrado.getDni());
-  
-            System.out.println(alumnoEncontrado.getDni());
-            jtApellido.setText(alumnoEncontrado.getApellido());
-            jtNombre.setText(alumnoEncontrado.getNombre());
-            jrbActivo.setSelected(true);
-            jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            
-                    
-      JOptionPane.showMessageDialog(null,"No se puede guardar alumno, es una identidad ya existente ");
-            
-  }
-          
-    else{
-            int dni= Integer.parseInt(jtDocumento.getText());
-            String apellido=jtApellido.getText();
-            String nombre=jtNombre.getText();
-            LocalDate fecha = jfechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-           
-   
-        Alumno alumno=new Alumno (dni,apellido,nombre,fecha,true);
+            AlumnoData buscar = new AlumnoData();
 
-        AlumnoData alu=new AlumnoData();
+            Alumno alumnoEncontrado = buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
+
+            if (alumnoEncontrado != null) {
+
+                System.out.println(alumnoEncontrado.getDni());
+
+                System.out.println(alumnoEncontrado.getDni());
+                jtApellido.setText(alumnoEncontrado.getApellido());
+                jtNombre.setText(alumnoEncontrado.getNombre());
+                jrbActivo.setSelected(true);
+                jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+                JOptionPane.showMessageDialog(null, "No se puede guardar alumno, es una identidad ya existente ");
+
+            } else {
+                int dni = Integer.parseInt(jtDocumento.getText());
+                String apellido = jtApellido.getText();
+                String nombre = jtNombre.getText();
+                LocalDate fecha = jfechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                Alumno alumno = new Alumno(dni, apellido, nombre, fecha, true);
+
+                AlumnoData alu = new AlumnoData();
 //alu.guardarAlumno(Juan);
-    alu.guardarAlumno(alumno);
-    System.out.println("alumno guardado");
-    }
+                alu.guardarAlumno(alumno);
+                System.out.println("alumno guardado");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "No escribio un numero  de documento valido.");
+            jtDocumento.setText("");
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No se puede guardar alumno, debe completar todos los datos");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
