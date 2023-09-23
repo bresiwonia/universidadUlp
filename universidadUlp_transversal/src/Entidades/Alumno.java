@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * @author viper
  */
-public class Alumno {
+public class Alumno implements Comparable<Alumno>{
     
 
     private int idAlumno;
@@ -96,5 +96,16 @@ public class Alumno {
         return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';
     }
 
+    @Override
+    public int compareTo(Alumno t) {
+    if(idAlumno==t.idAlumno){
+    return 0;
+
     
+}else if(idAlumno>t.idAlumno){
+    return 1;
+}else{
+    return -1;
 }
+    }
+ }

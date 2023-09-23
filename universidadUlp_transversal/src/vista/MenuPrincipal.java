@@ -13,14 +13,14 @@ import java.util.ArrayList;
  * @author viper
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    public static ArrayList<Alumno> alumnos = new ArrayList<>(); 
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-         
+
     }
 
     /**
@@ -39,7 +39,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmMateria = new javax.swing.JMenu();
         jMenuFMateria = new javax.swing.JMenuItem();
         jmAdministracion = new javax.swing.JMenu();
-        JFormularioDeInscripcion = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmMateria.setText("Materia");
 
-        jMenuFMateria.setText("Formulario Materia");
+        jMenuFMateria.setText("jMenuItem2");
         jMenuFMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFMateriaActionPerformed(evt);
@@ -88,13 +88,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmAdministracion.setText("Administración");
 
-        JFormularioDeInscripcion.setText("Manejo de Inscripciones");
-        JFormularioDeInscripcion.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem3.setText("Manejo de Inscripciones");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JFormularioDeInscripcionActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        jmAdministracion.add(JFormularioDeInscripcion);
+        jmAdministracion.add(jMenuItem3);
 
         jMenuItem4.setText("Manipulación de Notas");
         jmAdministracion.add(jMenuItem4);
@@ -139,8 +139,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuFAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFAlumnoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-     AlumnoView formulario=new AlumnoView();
-       formulario.setVisible(true);
+        AlumnoView formulario = new AlumnoView();
+        formulario.setVisible(true);
         escritorio.add(formulario);
         escritorio.moveToFront(formulario);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenuFAlumnoActionPerformed
@@ -151,23 +151,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirActionPerformed
 
     private void jMenuFMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFMateriaActionPerformed
-               escritorio.removeAll();
-        escritorio.repaint();
-FormularioMateria v2=new FormularioMateria();
-v2.setVisible(true);
-        escritorio.add(v2);
-        escritorio.moveToFront(v2); 
-    }//GEN-LAST:event_jMenuFMateriaActionPerformed
-
-    private void JFormularioDeInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JFormularioDeInscripcionActionPerformed
-        // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        Finscripciones v3=new Finscripciones();
+        FormularioMateria v2 = new FormularioMateria();
+        v2.setVisible(true);
+        escritorio.add(v2);
+        escritorio.moveToFront(v2);
+    }//GEN-LAST:event_jMenuFMateriaActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioDeInscripcion v3 = new FormularioDeInscripcion();
         v3.setVisible(true);
         escritorio.add(v3);
         escritorio.moveToFront(v3);
-    }//GEN-LAST:event_JFormularioDeInscripcionActionPerformed
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +195,8 @@ v2.setVisible(true);
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -206,11 +207,11 @@ v2.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem JFormularioDeInscripcion;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuFAlumno;
     private javax.swing.JMenuItem jMenuFMateria;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmAdministracion;

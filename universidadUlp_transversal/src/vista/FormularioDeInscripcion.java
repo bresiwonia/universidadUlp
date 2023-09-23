@@ -6,7 +6,13 @@
 package vista;
 
 import AccesoADatos.AlumnoData;
+import AccesoADatos.InscripcionData;
 import Entidades.Alumno;
+import Entidades.Inscripcion;
+import Entidades.Materia;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,14 +20,14 @@ import Entidades.Alumno;
  */
 public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
-    /**
+  private DefaultTableModel modelo=new DefaultTableModel(); 
+  /**
      * Creates new form FormularioDeInscripcion
      */
     public FormularioDeInscripcion() {
         initComponents();
-        CargarComboBox ();
+         CargarComboBox ();
         ArmarCabecera();
-      
     }
 
     /**
@@ -33,17 +39,19 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        list1 = new java.awt.List();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         JFormularioDeInscripcion = new javax.swing.JLabel();
         jLSeleccionAlumno = new javax.swing.JLabel();
         jListadoDeMaterias = new javax.swing.JLabel();
-        jRMateriasInscriptas = new javax.swing.JRadioButton();
-        jRmateriasNoInscriptas = new javax.swing.JRadioButton();
+        jrMateriaInscriptas = new javax.swing.JRadioButton();
+        jrMateriasNoIncriptas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTablaAlumnos = new javax.swing.JTable();
+        jTabla = new javax.swing.JTable();
         jBinscribir = new javax.swing.JButton();
         jBanularInscripcion = new javax.swing.JButton();
         JBsalir = new javax.swing.JButton();
-        jcbSeleccionA = new javax.swing.JComboBox<>();
+        jComboBox = new javax.swing.JComboBox<>();
 
         JFormularioDeInscripcion.setText("                             Formulario De Inscripcion");
 
@@ -51,11 +59,23 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
         jListadoDeMaterias.setText("Listado de Materias");
 
-        jRMateriasInscriptas.setText("Materias Inscriptas");
+        buttonGroup1.add(jrMateriaInscriptas);
+        jrMateriaInscriptas.setText("Materias Inscriptas");
+        jrMateriaInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrMateriaInscriptasActionPerformed(evt);
+            }
+        });
 
-        jRmateriasNoInscriptas.setText("Materias No Inscriptas");
+        buttonGroup1.add(jrMateriasNoIncriptas);
+        jrMateriasNoIncriptas.setText("Materias No Inscriptas");
+        jrMateriasNoIncriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrMateriasNoIncriptasActionPerformed(evt);
+            }
+        });
 
-        jTablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+        jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -66,7 +86,7 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTablaAlumnos);
+        jScrollPane1.setViewportView(jTabla);
 
         jBinscribir.setText("Inscribir");
 
@@ -74,36 +94,25 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
         JBsalir.setText("Salir");
 
-        jcbSeleccionA.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbSeleccionAItemStateChanged(evt);
-            }
-        });
-        jcbSeleccionA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbSeleccionAActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jListadoDeMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbSeleccionA, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JBsalir, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLSeleccionAlumno)
-                            .addComponent(jRMateriasInscriptas)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jrMateriaInscriptas)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLSeleccionAlumno)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 85, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,27 +122,31 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                                 .addComponent(jBanularInscripcion))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(269, 269, 269)
-                                .addComponent(jRmateriasNoInscriptas))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JFormularioDeInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                .addComponent(jrMateriasNoIncriptas)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(JFormularioDeInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(jListadoDeMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(JFormularioDeInscripcion)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLSeleccionAlumno)
-                    .addComponent(jcbSeleccionA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addComponent(jListadoDeMaterias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRMateriasInscriptas)
-                    .addComponent(jRmateriasNoInscriptas))
+                    .addComponent(jrMateriaInscriptas)
+                    .addComponent(jrMateriasNoIncriptas))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -141,52 +154,105 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
                     .addComponent(jBinscribir)
                     .addComponent(jBanularInscripcion)
                     .addComponent(JBsalir))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbSeleccionAItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSeleccionAItemStateChanged
-        // TODO add your handling code here:
-      
-    }//GEN-LAST:event_jcbSeleccionAItemStateChanged
+    private void jrMateriaInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriaInscriptasActionPerformed
+Alumno alu = (Alumno) jComboBox.getSelectedItem();
+            if (alu != null) {
+                if (jrMateriaInscriptas.isSelected()) {
+                    cargarTablaInscripta(alu.getIdAlumno());
+                } else if (jrMateriasNoIncriptas.isSelected()) {
+                    cargarTablaNoInscripta(alu.getIdAlumno());
+                }}       
+    }//GEN-LAST:event_jrMateriaInscriptasActionPerformed
 
-    private void jcbSeleccionAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbSeleccionAActionPerformed
+    private void jrMateriasNoIncriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriasNoIncriptasActionPerformed
+     Alumno alu =(Alumno) jComboBox.getSelectedItem();
+        cargarTablaNoInscripta(alu.getIdAlumno());
+        
+    
+    }//GEN-LAST:event_jrMateriasNoIncriptasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBsalir;
     private javax.swing.JLabel JFormularioDeInscripcion;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBanularInscripcion;
     private javax.swing.JButton jBinscribir;
+    private javax.swing.JComboBox<Alumno> jComboBox;
     private javax.swing.JLabel jLSeleccionAlumno;
     private javax.swing.JLabel jListadoDeMaterias;
-    private javax.swing.JRadioButton jRMateriasInscriptas;
-    private javax.swing.JRadioButton jRmateriasNoInscriptas;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTablaAlumnos;
-    private javax.swing.JComboBox<Alumno> jcbSeleccionA;
+    private javax.swing.JTable jTabla;
+    private javax.swing.JRadioButton jrMateriaInscriptas;
+    private javax.swing.JRadioButton jrMateriasNoIncriptas;
+    private java.awt.List list1;
     // End of variables declaration//GEN-END:variables
-
-    private void ArmarCabecera(){
+private void  CargarComboBox (){
+   
+AlumnoData alu= new AlumnoData();
+List<Alumno> alumnos =alu.listarAlumnos();
+    for (Alumno alumno : alumnos) {
+       jComboBox.addItem(alumno);
+       
         
-//        modelo.addColumn("ID");
-//        modelo.addColumn("-NOMBRE");
-//        modelo.addColumn("AÑO");
-//    
     }
 
-   private void CargarComboBox (){
+
+}
+    private void ArmarCabecera(){
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("-NOMBRE");
+        modelo.addColumn("AÑO");
+    jTabla.setModel(modelo);
     
-       AlumnoData lista= new AlumnoData () ;
-       
-       jcbSeleccionA.addItem((Alumno) lista.listarAlumnos()) ;
-       JFormularioDeInscripcion.setVisible(true);
-   }
-   
+    
+    }
+private void cargarTablaInscripta(int idAlumno){
+  InscripcionData Insc =new InscripcionData();
+  List<Materia> cursadas=Insc.obtenerMateriasCursadasPorAlumno(idAlumno);
+    borrarFilas();
+    for (Materia cursada : cursadas) {
+        modelo.addRow(new Object[]{
+            cursada.getIdMateria(),cursada.getNombre(),cursada.getAnioMateria()
+        
+        });
+        
+    }
+  
+    
+}
+
+private void cargarTablaNoInscripta(int idAlumno){
+  InscripcionData Insc =new InscripcionData();
+  List<Materia> nocursadas=Insc.obtenerMateriasNoCursadas(idAlumno);
+  borrarFilas();
+    for (Materia nocursada : nocursadas) {
+        modelo.addRow(new Object[]{
+            nocursada.getIdMateria(),nocursada.getNombre(),nocursada.getAnioMateria()
+        
+        });
+        
+        
+    }
+  
+    
+}
+private void borrarFilas() {
+
+        int filas = jTabla.getRowCount() - 1;
+
+        for (int i = filas; i >= 0; i--) {
+
+            modelo.removeRow(i);
+        }
+    }
 
 }
 
