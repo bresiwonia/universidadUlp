@@ -297,7 +297,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(null, "No se puede guardar alumno, es una identidad ya existente ");
 
-            } else {
+            } else  {
                
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String apellido = jtApellido.getText();
@@ -307,14 +307,12 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
                 Alumno alumno = new Alumno(dni, apellido, nombre, fecha, true);
                 AlumnoData alu = new AlumnoData();
+               
+             alu.guardarAlumno(alumno);
                 
-            if (estado == true){
-                alu.guardarAlumno(alumno);
                 System.out.println("alumno guardado");
             
-            } else { 
-                JOptionPane.showMessageDialog(null, "Debe pulsar el boton de estado");
-            } 
+  
                     } 
 //alu.guardarAlumno(Juan);
                
