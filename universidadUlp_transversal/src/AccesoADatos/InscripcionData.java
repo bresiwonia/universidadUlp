@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
-
+//prueba
     private Connection con = null;
     private MateriaData md = new MateriaData();
     private AlumnoData ad = new AlumnoData();

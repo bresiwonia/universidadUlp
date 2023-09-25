@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
  * @author viper
  */
 public class AlumnoView extends javax.swing.JInternalFrame {
-
+private AlumnoData aluData=new AlumnoData();
+private Alumno alumnoActual=null;
     /**
      * Creates new form Alumno
      */
@@ -214,19 +215,18 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtNombreActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        try {
-            AlumnoData buscar = new AlumnoData();
+           try {
+           
+         int dni=Integer.parseInt(jtDocumento.getText());
+      alumnoActual=aluData.buscarAlumnoPorDni(dni);
 
-            Alumno alumnoEncontrado = buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-            System.out.println(alumnoEncontrado.getDni());
+            if (alumnoActual != null) {
 
-            if (alumnoEncontrado != null) {
-
-                System.out.println(alumnoEncontrado.getDni());
-                jtApellido.setText(alumnoEncontrado.getApellido());
-                jtNombre.setText(alumnoEncontrado.getNombre());
+               
+                jtApellido.setText(alumnoActual .getApellido());
+                jtNombre.setText(alumnoActual .getNombre());
                 jrbActivo.setSelected(true);
-                jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                jfechaNacimiento.setDate(Date.from(alumnoActual .getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
             }
 
@@ -279,51 +279,41 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        try {
+            try {
 
-            AlumnoData buscar = new AlumnoData();
-
-            Alumno alumnoEncontrado = buscar.buscarAlumnoPorDni(Integer.parseInt(jtDocumento.getText()));
-
-            if (alumnoEncontrado != null) {
-
-                System.out.println(alumnoEncontrado.getDni());
-
-                System.out.println(alumnoEncontrado.getDni());
-                jtApellido.setText(alumnoEncontrado.getApellido());
-                jtNombre.setText(alumnoEncontrado.getNombre());
-                jrbActivo.setSelected(true);
-                jfechaNacimiento.setDate(Date.from(alumnoEncontrado.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-
-                JOptionPane.showMessageDialog(null, "No se puede guardar alumno, es una identidad ya existente ");
-
-            } else  {
-               
-                int dni = Integer.parseInt(jtDocumento.getText());
+          int dni = Integer.parseInt(jtDocumento.getText());
                 String apellido = jtApellido.getText();
                 String nombre = jtNombre.getText();
-                boolean estado = jrbActivo.isSelected();
-                LocalDate fecha = jfechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-                Alumno alumno = new Alumno(dni, apellido, nombre, fecha, true);
-                AlumnoData alu = new AlumnoData();
                
-             alu.guardarAlumno(alumno);
-                
+if(nombre.isEmpty()|| apellido.isEmpty()){
+    JOptionPane.showMessageDialog(this, "no puede haber campos vacios");
+    return;
+} 
+LocalDate fecha = jfechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+Boolean estado=jrbActivo.isSelected();
+if (alumnoActual==null){
+       
+Alumno alumno = new Alumno(dni, apellido, nombre, fecha, true);
+    
+                aluData.guardarAlumno(alumno);
                 System.out.println("alumno guardado");
+                
+            }else {
+                   
+                     alumnoActual.setDni(dni);
+                      alumnoActual.setApellido(apellido);
+                      alumnoActual.setNombre(nombre);
+                     alumnoActual.setFechaNacimiento(fecha);
             
-  
-                    } 
-//alu.guardarAlumno(Juan);
-               
+      
+                               aluData.modificarAlumno(alumnoActual);
+                               System.out.println("se modifico el alumno con exito");
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "No escribio un numero  de documento valido.");
             jtDocumento.setText("");
 
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "No se puede guardar alumno, debe completar todos los datos");
-            
-        }
+        } 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
