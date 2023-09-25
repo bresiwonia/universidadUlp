@@ -7,6 +7,7 @@ package vista;
 
 import AccesoADatos.AlumnoData;
 import AccesoADatos.InscripcionData;
+import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
@@ -20,14 +21,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
-  private DefaultTableModel modelo=new DefaultTableModel(); 
+    
+    
+
+  private DefaultTableModel modelo;
   /**
      * Creates new form FormularioDeInscripcion
      */
     public FormularioDeInscripcion() {
         initComponents();
-         CargarComboBox ();
+    
+      
+        modelo=new DefaultTableModel();
+          CargarComboBox ();
         ArmarCabecera();
+        
+        
+        
     }
 
     /**
@@ -89,10 +99,13 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jBinscribir.setText("Inscribir");
+        jBinscribir.setEnabled(false);
 
         jBanularInscripcion.setText("Anular Inscripcion");
+        jBanularInscripcion.setEnabled(false);
 
         JBsalir.setText("Salir");
+        JBsalir.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,7 +229,7 @@ List<Alumno> alumnos =alu.listarAlumnos();
     }
 private void cargarTablaInscripta(int idAlumno){
   InscripcionData Insc =new InscripcionData();
-  List<Materia> cursadas=Insc.obtenerMateriasCursadasPorAlumno(idAlumno);
+  List<Materia> cursadas=Insc.obtenerMateriaCursadas(idAlumno);
     borrarFilas();
     for (Materia cursada : cursadas) {
         modelo.addRow(new Object[]{
@@ -231,7 +244,7 @@ private void cargarTablaInscripta(int idAlumno){
 
 private void cargarTablaNoInscripta(int idAlumno){
   InscripcionData Insc =new InscripcionData();
-  List<Materia> nocursadas=Insc.obtenerMateriasNoCursadas(idAlumno);
+  List<Materia> nocursadas=Insc.obtenerMateriaNoCursada(idAlumno);
   borrarFilas();
     for (Materia nocursada : nocursadas) {
         modelo.addRow(new Object[]{

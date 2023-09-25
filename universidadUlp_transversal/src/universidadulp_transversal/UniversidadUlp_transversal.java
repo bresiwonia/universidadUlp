@@ -91,7 +91,7 @@ InscripcionData id=new InscripcionData();
 //}
 //        }
     
-for(Materia materia:id.obtenerMateriasNoCursadas(5)){
+for(Materia materia:id.obtenerMateriaCursadas(2)){
     
     System.out.println("nombre "+materia.getNombre());
 }   
