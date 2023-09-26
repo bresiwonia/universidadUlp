@@ -40,7 +40,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuFMateria = new javax.swing.JMenuItem();
         jmAdministracion = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuPrecio = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
@@ -55,11 +55,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
+            .addGap(0, 642, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 356, Short.MAX_VALUE)
+            .addGap(0, 460, Short.MAX_VALUE)
         );
 
         jmAlumno.setText("Alumno");
@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmMateria.setText("Materia");
 
-        jMenuFMateria.setText("Formulario Materia");
+        jMenuFMateria.setText("jMenuItem2");
         jMenuFMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFMateriaActionPerformed(evt);
@@ -96,8 +96,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmAdministracion.add(jMenuItem3);
 
-        jMenuItem4.setText("Manipulación de Notas");
-        jmAdministracion.add(jMenuItem4);
+        jMenuPrecio.setText("Manipulación de Notas");
+        jMenuPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuPrecioActionPerformed(evt);
+            }
+        });
+        jmAdministracion.add(jMenuPrecio);
 
         jMenuBar1.add(jmAdministracion);
 
@@ -122,15 +127,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         pack();
@@ -167,6 +168,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(v3);
         escritorio.moveToFront(v3);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPrecioActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+       CargarNotas v4 = new CargarNotas();
+        v4.setVisible(true);
+        escritorio.add(v4);
+        escritorio.moveToFront(v4);
+    }//GEN-LAST:event_jMenuPrecioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,8 +222,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuFAlumno;
     private javax.swing.JMenuItem jMenuFMateria;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuPrecio;
     private javax.swing.JMenu jmAdministracion;
     private javax.swing.JMenu jmAlumno;
     private javax.swing.JMenu jmConsultas;

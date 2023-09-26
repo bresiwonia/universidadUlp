@@ -2,7 +2,6 @@ package AccesoADatos;
 
 import AccesoADatos.AlumnoData;
 import AccesoADatos.Conexion;
-import AccesoADatos.MateriaData;
 import Entidades.Alumno;
 import Entidades.Inscripcion;
 import Entidades.Materia;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
-//prueba
+
     private Connection con = null;
     private MateriaData md = new MateriaData();
     private AlumnoData ad = new AlumnoData();
@@ -95,7 +94,7 @@ public class InscripcionData {
                 Inscripcion insc = new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
                 Alumno alu = ad.buscarAlumno(rs.getInt("idAlumno"));
-                Materia mat = md.buscarMateria(rs.getInt("idMateria"));
+                Materia mat = md.obtenerMateriaPorId(rs.getInt("idMateria"));
                 insc.setAlumno(alu);
                 insc.setMateria(mat);
                 insc.setNota(rs.getDouble("nota"));
@@ -161,4 +160,48 @@ return materias;
         return materias;
         
     }
+    
+    public ArrayList<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
+            ArrayList<Inscripcion> cursadas=new ArrayList<>();
+            
+            String sql= "SELECT idInscripcion, m.idMateria, i.idAlumno, nota FROM inscripcion AS i"
+                    + " JOIN materia AS m"
+                    + " ON m.idMateria = i.idMateria"
+                    + " WHERE idAlumno = ?";
+             
+         try {
+             PreparedStatement ps = con.prepareStatement(sql);
+             ps.setInt(1, idAlumno);
+             ResultSet rs=ps.executeQuery();
+             
+             while (rs.next()) {
+                 Inscripcion insc=new Inscripcion();
+                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                 System.out.println("1");
+                 System.out.println(rs.getInt("i.idAlumno"));
+                 Alumno alu=ad.buscarAlumno(rs.getInt("i.idAlumno"));
+                 System.out.println("2");
+                 System.out.println("IDMateria: " + rs.getInt("m.idMateria"));
+                 //System.out.println(md.buscarMateria(rs.getInt("m.idMateria")));
+                 Materia mate=md.obtenerMateriaPorId(rs.getInt("m.idMateria"));
+                 System.out.println("3");
+                 System.out.println(alu.getApellido());
+                 System.out.println("4");
+                 insc.setAlumno(alu);
+                 insc.setMateria(mate);
+                 System.out.println(mate.getNombre());
+                 System.out.println("5");
+                 insc.setNota(rs.getInt("nota"));
+                 System.out.println("6");
+                 cursadas.add(insc);
+                 System.out.println("7");
+              }
+             
+             ps.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+         }          
+          return cursadas;
+    }
+    
 }
