@@ -105,6 +105,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         });
 
         jBanularInscripcion.setText("Anular Inscripcion");
+        jBanularInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBanularInscripcionActionPerformed(evt);
+            }
+        });
 
         JBsalir.setText("Salir");
 
@@ -207,11 +212,29 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
          
          Inscripcion i = new Inscripcion(a,m,0);
          
-         inscrip.guardarInscripcion(ins);
+         inscrip.guardarInscripcion(i);
          borrarFilas ();
       }
 
     }//GEN-LAST:event_jBinscribirActionPerformed
+
+    private void jBanularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBanularInscripcionActionPerformed
+
+            int filaSeleccionada = jTabla.getSelectedRow();
+            if(filaSeleccionada != -1){
+            
+            Alumno a = (Alumno) jComboBox.getSelectedItem();
+            int idMateria = (int) modelo.getValueAt(filaSeleccionada, 0);
+            inscrip.borrarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
+            borrarFilas();
+            
+            
+            }
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBanularInscripcionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

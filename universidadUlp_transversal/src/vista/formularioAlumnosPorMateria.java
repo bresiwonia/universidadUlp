@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
+
+import AccesoADatos.AlumnoData;
+import AccesoADatos.MateriaData;
+import Entidades.Alumno;
+import Entidades.Materia;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,11 +14,15 @@ package vista;
  */
 public class formularioAlumnosPorMateria extends javax.swing.JFrame {
 
-    /**
-     * Creates new form formularioAlumnosPorMateria
-     */
+    
+    private DefaultTableModel modelo;
+    
     public formularioAlumnosPorMateria() {
         initComponents();
+        modelo = new DefaultTableModel();
+        CargarComboBox();
+        ArmarCabecera();
+    
     }
 
     /**
@@ -29,10 +36,10 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcbMateriaData = new javax.swing.JComboBox<>();
+        jComboBox = new javax.swing.JComboBox<>();
         jbExit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ID = new javax.swing.JTable();
+        JTabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,10 +47,9 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
 
         jLabel2.setText("Selecciona una materia");
 
-        jcbMateriaData.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcbMateriaData.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbMateriaDataActionPerformed(evt);
+                jComboBoxActionPerformed(evt);
             }
         });
 
@@ -54,7 +60,7 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
             }
         });
 
-        ID.setModel(new javax.swing.table.DefaultTableModel(
+        JTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -73,7 +79,7 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(ID);
+        jScrollPane1.setViewportView(JTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,11 +95,11 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(114, 114, 114)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jcbMateriaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(106, 106, 106)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -107,7 +113,7 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbMateriaData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,9 +125,13 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbMateriaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriaDataActionPerformed
+    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcbMateriaDataActionPerformed
+        
+        
+        
+        
+    }//GEN-LAST:event_jComboBoxActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
         dispose();
@@ -164,11 +174,46 @@ public class formularioAlumnosPorMateria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable ID;
+    private javax.swing.JTable JTabla;
+    private javax.swing.JComboBox<Materia> jComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbExit;
-    private javax.swing.JComboBox<String> jcbMateriaData;
     // End of variables declaration//GEN-END:variables
+
+    private void CargarComboBox() {
+        MateriaData mate = new MateriaData();
+        List<Materia> mat = mate.listarMaterias();
+        for (Materia materia : mat) {
+            jComboBox.addItem(materia);
+        }
+  
+          
+        
+       
+        
+        }
+    private void borrarFilas() {
+
+        int filas = JTabla.getRowCount() - 1;
+
+        for (int i = filas; i >= 0; i--) {
+
+            modelo.removeRow(i);
+        }
+    }
+    
+    
+    
+private void ArmarCabecera() {
+
+        modelo.addColumn("ID");
+        modelo.addColumn("-NOMBRE");
+        modelo.addColumn("AÑO");
+        JTabla.setModel(modelo);
+}
+
+
+
 }

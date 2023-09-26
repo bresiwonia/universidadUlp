@@ -109,6 +109,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmConsultas.setText("Consultas");
 
         jMenuItem5.setText("Alumnos por Materia");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jmConsultas.add(jMenuItem5);
 
         jMenuBar1.add(jmConsultas);
@@ -177,6 +182,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(v4);
         escritorio.moveToFront(v4);
     }//GEN-LAST:event_jMenuPrecioActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+       formularioAlumnosPorMateria v5 = new formularioAlumnosPorMateria();
+        v5.setVisible(true);
+        escritorio.add(v5);
+        escritorio.moveToFront(v5);
+        
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
