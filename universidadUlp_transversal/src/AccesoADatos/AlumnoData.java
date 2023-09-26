@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AccesoADatos;
 
 import Entidades.Alumno;
@@ -16,14 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author viper
- */
 public class AlumnoData {
 
     private Connection con = null;
-    
+
     public AlumnoData() {
 
         con = Conexion.getConexion();
@@ -155,32 +146,30 @@ public class AlumnoData {
         return alumno;
     }
 
- public List<Alumno> listarAlumnos() {
-String sql = "SELECT * FROM alumno WHERE estado = 1 ";
- ArrayList<Alumno> alumnos = new ArrayList<>();
- try {
- 
- PreparedStatement ps = con.prepareStatement(sql);
- ResultSet rs = ps.executeQuery();
- while (rs.next()) {
- Alumno alumno = new Alumno();
+    public List<Alumno> listarAlumnos() {
+        String sql = "SELECT * FROM alumno WHERE estado = 1 ";
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+        try {
 
- alumno.setIdAlumno(rs.getInt("idAlumno"));
- alumno.setDni(rs.getInt("dni"));
- alumno.setApellido(rs.getString("apellido"));
- alumno.setNombre(rs.getString("nombre"));
- alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
- alumno.setEstado(rs.getBoolean("estado"));
- alumnos.add(alumno);
- }
- ps.close();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
 
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
+                alumnos.add(alumno);
+            }
+            ps.close();
 
- } catch (SQLException ex) {
- JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno "+ex.getMessage());
- }
- return alumnos;
- }
-
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+        }
+        return alumnos;
+    }
 
 }
