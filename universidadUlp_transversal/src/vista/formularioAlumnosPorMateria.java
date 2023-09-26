@@ -7,7 +7,7 @@ package vista;
 
 /**
  *
- * @author Samsung
+ * @author Ximena
  */
 public class formularioAlumnosPorMateria extends javax.swing.JFrame {
 
