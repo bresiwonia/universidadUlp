@@ -5,6 +5,7 @@
  */
 package AccesoADatos;
 
+import AccesoADatos.Conexion;
 import Entidades.Alumno;
 import Entidades.Materia;
 import java.sql.Connection;
@@ -57,35 +58,50 @@ public class MateriaData {
         }
     }
 
-    public Materia buscarMateria(int id) {
+//    public Materia buscarMateria(int id) {
+//        Materia materia = null;
+//        try (PreparedStatement ps = con.prepareStatement("SELECT idMateria, nombre, anioMateria, activo FROM materia WHERE idMateria = ?", Statement.RETURN_GENERATED_KEYS)){
+//            //PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            ResultSet rs = ps.executeQuery();
+//            System.out.println(rs.next());
+//            if (rs.next()) {
+//                materia = new Materia();
+//                System.out.println("Estoy dentro del if");
+//                materia.setIdMateria(id);
+//                System.out.println(rs.getInt("idMateria"));
+//                System.out.println(rs.getInt("nombre"));
+//                System.out.println(rs.getInt("anioMateria"));
+//                System.out.println(rs.getInt("activo"));
+//                materia.setNombre(rs.getString("nombre"));
+//                materia.setAnioMateria(rs.getInt("anioMateria"));
+//                materia.setActivo(true);
+//                System.out.println("2.5");
+//                System.out.println(materia.getNombre());
+//            } else {
+//                JOptionPane.showMessageDialog(null, "No existe la materia");
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia" + ex.getMessage());
+//
+//        }
+//
+//        return materia;
+//
+//    }
+    
+    public Materia obtenerMateriaPorId(int idMateria) {
         Materia materia = null;
-        String sql = "SELECT * FROM materia WHERE idMateria = ? AND activo = 1";
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+        try (PreparedStatement ps = con.prepareStatement("SELECT idMateria, nombre, anioMateria, activo FROM materia WHERE idMateria = ?", Statement.RETURN_GENERATED_KEYS)){
+            ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                materia = new Materia();
-                materia.setIdMateria(id);
-                materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("anioMateria"));
-                materia.setActivo(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe la materia");
-
+            while (rs.next()) {
+                materia = new Materia(rs.getInt("idMateria"), rs.getString("nombre"), rs.getInt("anioMateria"), rs.getBoolean("activo"));
             }
-            ps.close();
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia" + ex.getMessage());
-
+            JOptionPane.showMessageDialog(null,"Ha ocurrido un error al intentar obtener al alumno con id: " + idMateria + ". Error: " + ex.getMessage());
         }
-
         return materia;
-
     }
 
     public void modificarMateria(Materia materia) {

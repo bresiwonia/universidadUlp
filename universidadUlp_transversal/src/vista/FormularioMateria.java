@@ -5,7 +5,6 @@
  */
 package vista;
 
-
 import AccesoADatos.MateriaData;
 import Entidades.Materia;
 import javax.swing.JOptionPane;
@@ -15,8 +14,9 @@ import javax.swing.JOptionPane;
  * @author viper
  */
 public class FormularioMateria extends javax.swing.JInternalFrame {
-    private MateriaData matedata = new MateriaData ();
-    private Materia materiaActual = null ;
+
+    private MateriaData matedata = new MateriaData();
+    private Materia materiaActual = null;
 
     /**
      * Creates new form FormularioMateria
@@ -183,14 +183,14 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
-            
-            int idMateria = Integer.parseInt(jtIdMateria.getText ());
-            materiaActual = matedata.buscarMateria(idMateria);
+
+            int idMateria = Integer.parseInt(jtIdMateria.getText());
+            materiaActual = matedata.obtenerMateriaPorId(idMateria);
 //       
             if (materiaActual != null) {
 
                 jtNombre.setText(materiaActual.getNombre());
-                jtAnio.setText(String.valueOf(materiaActual .getAnioMateria()));
+                jtAnio.setText(String.valueOf(materiaActual.getAnioMateria()));
                 jrbActivo.setSelected(true);
 
             }
@@ -221,62 +221,58 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        
+
         try {
-            
-            int idMateria = Integer.parseInt(jtIdMateria.getText ());
-            
+
+            int idMateria = Integer.parseInt(jtIdMateria.getText());
+
             String nombre = jtNombre.getText();
-            int anioMateria = Integer.parseInt (jtAnio.getText());
-           
-            if (nombre.isEmpty()){
-            
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos ");
-            return ;
+            int anioMateria = Integer.parseInt(jtAnio.getText());
+
+            if (nombre.isEmpty()) {
+
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos ");
+                return;
             }
-            
-             Boolean activo = jrbActivo.isSelected();
-            
+
+            Boolean activo = jrbActivo.isSelected();
+
             if (materiaActual == null) {
-            
-            Materia materia = new Materia (nombre, anioMateria, activo);
-            matedata.guardarMateria(materia);
-           
-            
-            }else {
-                        
+
+                Materia materia = new Materia(nombre, anioMateria, activo);
+                matedata.guardarMateria(materia);
+
+            } else {
+                materiaActual.setIdMateria(idMateria);
                 materiaActual.setNombre(nombre);
                 materiaActual.setAnioMateria(anioMateria);
                 materiaActual.setActivo(activo);
-                
+
                 matedata.modificarMateria(materiaActual);
-              
-                    }
-       
-            }catch (NumberFormatException exc ) {
-              
-                JOptionPane.showMessageDialog(null, "Debe escribir un número entero" );
-            
+
             }
-          
+
+        } catch (NumberFormatException exc) {
+
+            JOptionPane.showMessageDialog(null, "Debe escribir un número entero");
+
+        }
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         try {
             MateriaData buscar = new MateriaData();
 
-            Materia materiaEncontrada = buscar.buscarMateria(Integer.parseInt(jtIdMateria.getText()));
+            Materia materiaEncontrada = buscar.obtenerMateriaPorId(Integer.parseInt(jtIdMateria.getText()));
 
             System.out.println(materiaEncontrada.getIdMateria());
 
-            if (materiaEncontrada != null) {
+            jtNombre.setText(materiaEncontrada.getNombre());
+            jtAnio.setText(String.valueOf(materiaEncontrada.getAnioMateria()));
+            jrbActivo.setSelected(true);
+            buscar.eliminarMateria(Integer.parseInt(jtIdMateria.getText()));
 
-                jtNombre.setText(materiaEncontrada.getNombre());
-                jtAnio.setText(String.valueOf(materiaEncontrada.getAnioMateria()));
-                jrbActivo.setSelected(true);
-                buscar.eliminarMateria(Integer.parseInt(jtIdMateria.getText()));
-
-            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "No escribio un id valido");
 
