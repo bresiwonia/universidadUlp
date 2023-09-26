@@ -21,23 +21,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
 
-    
-    
+    private InscripcionData inscrip = new InscripcionData();
 
-  private DefaultTableModel modelo;
-  /**
+    private Inscripcion ins = new Inscripcion();
+
+    private DefaultTableModel modelo;
+
+    /**
      * Creates new form FormularioDeInscripcion
      */
     public FormularioDeInscripcion() {
         initComponents();
-    
-      
-        modelo=new DefaultTableModel();
-          CargarComboBox ();
+
+        modelo = new DefaultTableModel();
+        CargarComboBox();
         ArmarCabecera();
-        
-        
-        
+
     }
 
     /**
@@ -99,6 +98,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jBinscribir.setText("Inscribir");
+        jBinscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBinscribirActionPerformed(evt);
+            }
+        });
 
         jBanularInscripcion.setText("Anular Inscripcion");
 
@@ -165,21 +169,41 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrMateriaInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriaInscriptasActionPerformed
-Alumno alu = (Alumno) jComboBox.getSelectedItem();
-            if (alu != null) {
-                if (jrMateriaInscriptas.isSelected()) {
-                    cargarTablaInscripta(alu.getIdAlumno());
-                } else if (jrMateriasNoIncriptas.isSelected()) {
-                    cargarTablaNoInscripta(alu.getIdAlumno());
-                }}       
+        Alumno alu = (Alumno) jComboBox.getSelectedItem();
+        borrarFilas();
+        jBinscribir.setEnabled(false);
+        jBanularInscripcion.setEnabled(true);
+
+        if (alu != null) {
+            if (jrMateriaInscriptas.isSelected()) {
+                cargarTablaInscripta(alu.getIdAlumno());
+            } else if (jrMateriasNoIncriptas.isSelected()) {
+                cargarTablaNoInscripta(alu.getIdAlumno());
+            }
+        }
     }//GEN-LAST:event_jrMateriaInscriptasActionPerformed
 
     private void jrMateriasNoIncriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriasNoIncriptasActionPerformed
-     Alumno alu =(Alumno) jComboBox.getSelectedItem();
+        Alumno alu = (Alumno) jComboBox.getSelectedItem();
+        borrarFilas();
         cargarTablaNoInscripta(alu.getIdAlumno());
-        
-    
+
+        jBinscribir.setEnabled(true);
+        jBanularInscripcion.setEnabled(false);
     }//GEN-LAST:event_jrMateriasNoIncriptasActionPerformed
+
+    private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
+        // TODO add your handling code here:
+
+        int filaSeleccionada = jTabla.getSelectedRow();
+        if (filaSeleccionada != -1) {
+
+            int idAlumno = (int) jTabla.getValueAt(filaSeleccionada, 0);
+            String materia = (String) jTabla.getValueAt(filaSeleccionada, idAlumno);
+
+        }
+
+    }//GEN-LAST:event_jBinscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -197,58 +221,55 @@ Alumno alu = (Alumno) jComboBox.getSelectedItem();
     private javax.swing.JRadioButton jrMateriasNoIncriptas;
     private java.awt.List list1;
     // End of variables declaration//GEN-END:variables
-private void  CargarComboBox (){
-   
-AlumnoData alu= new AlumnoData();
-List<Alumno> alumnos =alu.listarAlumnos();
-    for (Alumno alumno : alumnos) {
-       jComboBox.addItem(alumno);
-       
-        
+private void CargarComboBox() {
+
+        AlumnoData alu = new AlumnoData();
+        List<Alumno> alumnos = alu.listarAlumnos();
+        for (Alumno alumno : alumnos) {
+            jComboBox.addItem(alumno);
+
+        }
+
     }
 
+    private void ArmarCabecera() {
 
-}
-    private void ArmarCabecera(){
-        
         modelo.addColumn("ID");
         modelo.addColumn("-NOMBRE");
         modelo.addColumn("AÑO");
-    jTabla.setModel(modelo);
-    
-    
-    }
-private void cargarTablaInscripta(int idAlumno){
-  InscripcionData Insc =new InscripcionData();
-  List<Materia> cursadas=Insc.obtenerMateriaCursadas(idAlumno);
-    borrarFilas();
-    for (Materia cursada : cursadas) {
-        modelo.addRow(new Object[]{
-            cursada.getIdMateria(),cursada.getNombre(),cursada.getAnioMateria()
-        
-        });
-        
-    }
-  
-    
-}
+        jTabla.setModel(modelo);
 
-private void cargarTablaNoInscripta(int idAlumno){
-  InscripcionData Insc =new InscripcionData();
-  List<Materia> nocursadas=Insc.obtenerMateriaNoCursada(idAlumno);
-  borrarFilas();
-    for (Materia nocursada : nocursadas) {
-        modelo.addRow(new Object[]{
-            nocursada.getIdMateria(),nocursada.getNombre(),nocursada.getAnioMateria()
-        
-        });
-        
-        
     }
-  
-    
-}
-private void borrarFilas() {
+
+    private void cargarTablaInscripta(int idAlumno) {
+        InscripcionData Insc = new InscripcionData();
+        List<Materia> cursadas = Insc.obtenerMateriaCursadas(idAlumno);
+        borrarFilas();
+        for (Materia cursada : cursadas) {
+            modelo.addRow(new Object[]{
+                cursada.getIdMateria(), cursada.getNombre(), cursada.getAnioMateria()
+
+            });
+
+        }
+
+    }
+
+    private void cargarTablaNoInscripta(int idAlumno) {
+        InscripcionData Insc = new InscripcionData();
+        List<Materia> nocursadas = Insc.obtenerMateriaNoCursada(idAlumno);
+        borrarFilas();
+        for (Materia nocursada : nocursadas) {
+            modelo.addRow(new Object[]{
+                nocursada.getIdMateria(), nocursada.getNombre(), nocursada.getAnioMateria()
+
+            });
+
+        }
+
+    }
+
+    private void borrarFilas() {
 
         int filas = jTabla.getRowCount() - 1;
 
@@ -259,4 +280,3 @@ private void borrarFilas() {
     }
 
 }
-
