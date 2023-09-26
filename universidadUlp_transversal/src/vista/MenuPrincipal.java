@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmMateria.setText("Materia");
 
-        jMenuFMateria.setText("jMenuItem2");
+        jMenuFMateria.setText("Formulario Materia");
         jMenuFMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFMateriaActionPerformed(evt);

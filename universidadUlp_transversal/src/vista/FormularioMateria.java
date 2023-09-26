@@ -5,13 +5,9 @@
  */
 package vista;
 
-import AccesoADatos.AlumnoData;
+
 import AccesoADatos.MateriaData;
-import Entidades.Alumno;
 import Entidades.Materia;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +15,8 @@ import javax.swing.JOptionPane;
  * @author viper
  */
 public class FormularioMateria extends javax.swing.JInternalFrame {
+    private MateriaData matedata = new MateriaData ();
+    private Materia materiaActual = null ;
 
     /**
      * Creates new form FormularioMateria
@@ -57,9 +55,9 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
 
-        jLabel2.setText("Codigo;");
+        jLabel2.setText("Codigo:");
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Nombre:");
 
         jLabel4.setText("Año:");
 
@@ -185,16 +183,14 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
-            MateriaData buscar = new MateriaData();
-
-            Materia materiaEncontrada = buscar.buscarMateria(Integer.parseInt(jtIdMateria.getText()));
-
-            System.out.println(materiaEncontrada.getIdMateria());
+            
+            int idMateria = Integer.parseInt(jtIdMateria.getText ());
+            materiaActual = matedata.buscarMateria(idMateria);
 //       
-            if (materiaEncontrada != null) {
+            if (materiaActual != null) {
 
-                jtNombre.setText(materiaEncontrada.getNombre());
-                jtAnio.setText(String.valueOf(materiaEncontrada.getAnioMateria()));
+                jtNombre.setText(materiaActual.getNombre());
+                jtAnio.setText(String.valueOf(materiaActual .getAnioMateria()));
                 jrbActivo.setSelected(true);
 
             }
@@ -225,63 +221,44 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-//        try {
-//            MateriaData buscar = new MateriaData();
-//
-//            Materia materiaEncontrada = buscar.buscarMateria(Integer.parseInt(jtIdMateria.getText()));
-//
-//            System.out.println(materiaEncontrada.getIdMateria());
-//
-//            if (materiaEncontrada != null) {
-//
-//                jtNombre.setText(materiaEncontrada.getNombre());
-//                jtAnio.setText(String.valueOf(materiaEncontrada.getAnioMateria()));
-//                jrbActivo.setSelected(true);
-////                
-////                Materia m1 = new Materia();
-////                Materia m2 = new Materia();
-////                int codigo=-1;
-//
-////                jtIdMateria.setText(null);
-////                jtIdMateria.get
-////                m1.setNombre(jtNombre.getText());
-////                m1.setAnioMateria(Integer.parseInt(jtAnio.getText()));
-////                m1.setActivo(true);
-////
-////                     m2.setNombre(jtNombre.getText());
-////                m2.setAnioMateria(Integer.parseInt(jtAnio.getText()));
-////                m2.setActivo(true);
-////                
-//            }
-//
-//            else if(materiaEncontrada.isActivo())
-//            {
-//              String nombre = jtNombre.getText();
-//                int anioMateria = Integer.parseInt(jtAnio.getText());
-//                boolean Activo=jrbActivo.get;
-//                Materia materia = new Materia(nombre, anioMateria, Activo);
-//                buscar.modificarMateria(materiaEncontrada);
-//
-//            }else {
-//                
-//                int IdMateria = Integer.parseInt(jtIdMateria.getText());
-//                String nombre = jtNombre.getText();
-//                int anioMateria = Integer.parseInt(jtAnio.getText());
-//                boolean Activo = jrbActivo.isSelected();
-//                
-//                Materia materia = new Materia(IdMateria, nombre, anioMateria, Activo);
-//                
-//                MateriaData guardar = new MateriaData();
-//                guardar.modificarMateria(materia);
-//                guardar.guardarMateria(materia);
-//            }
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(null, "No escribio un id valido");
-//
-//        } catch (NullPointerException e) {
-//            JOptionPane.showMessageDialog(null, "No se puede guardar la materia, debe completar todos los datos");
-//        }
-
+        
+        try {
+            
+            int idMateria = Integer.parseInt(jtIdMateria.getText ());
+            
+            String nombre = jtNombre.getText();
+            int anioMateria = Integer.parseInt (jtAnio.getText());
+           
+            if (nombre.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos ");
+            return ;
+            }
+            
+             Boolean activo = jrbActivo.isSelected();
+            
+            if (materiaActual == null) {
+            
+            Materia materia = new Materia (nombre, anioMateria, activo);
+            matedata.guardarMateria(materia);
+           
+            
+            }else {
+                        
+                materiaActual.setNombre(nombre);
+                materiaActual.setAnioMateria(anioMateria);
+                materiaActual.setActivo(activo);
+                
+                matedata.modificarMateria(materiaActual);
+              
+                    }
+       
+            }catch (NumberFormatException exc ) {
+              
+                JOptionPane.showMessageDialog(null, "Debe escribir un número entero" );
+            
+            }
+          
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
