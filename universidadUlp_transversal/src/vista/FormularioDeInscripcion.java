@@ -105,6 +105,11 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
         });
 
         jBanularInscripcion.setText("Anular Inscripcion");
+        jBanularInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBanularInscripcionActionPerformed(evt);
+            }
+        });
 
         JBsalir.setText("Salir");
 
@@ -195,15 +200,41 @@ public class FormularioDeInscripcion extends javax.swing.JInternalFrame {
     private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
         // TODO add your handling code here:
 
-        int filaSeleccionada = jTabla.getSelectedRow();
-        if (filaSeleccionada != -1) {
+       int filaSeleccionada = jTabla.getSelectedRow();
+       if (filaSeleccionada != -1) {
 
-            int idAlumno = (int) jTabla.getValueAt(filaSeleccionada, 0);
-            String materia = (String) jTabla.getValueAt(filaSeleccionada, idAlumno);
-
-        }
+         Alumno a = (Alumno) jComboBox.getSelectedItem();
+         int idMateria = (int) modelo.getValueAt(filaSeleccionada, 0);
+         //String materia = (String) modelo.getValueAt(filaSeleccionada, 1);
+         String nombre =  (String) modelo.getValueAt(filaSeleccionada, 1);
+         int anioMateria = (int) modelo.getValueAt(filaSeleccionada, 2);
+         Materia m = new Materia(idMateria, nombre, anioMateria, true);
+         
+         Inscripcion i = new Inscripcion(a,m,0);
+         
+         inscrip.guardarInscripcion(i);
+         borrarFilas ();
+      }
 
     }//GEN-LAST:event_jBinscribirActionPerformed
+
+    private void jBanularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBanularInscripcionActionPerformed
+
+            int filaSeleccionada = jTabla.getSelectedRow();
+            if(filaSeleccionada != -1){
+            
+            Alumno a = (Alumno) jComboBox.getSelectedItem();
+            int idMateria = (int) modelo.getValueAt(filaSeleccionada, 0);
+            inscrip.borrarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
+            borrarFilas();
+            
+            
+            }
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBanularInscripcionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
